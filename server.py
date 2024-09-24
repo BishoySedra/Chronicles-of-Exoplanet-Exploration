@@ -11,10 +11,14 @@ app = Flask(__name__)
 df = pd.read_csv("Scientific_Info.csv")
 # Load trained model
 
-model = joblib.load(r'.\Saved_Model\XGBoost_model.joblib')
+# model = joblib.load(r'.\Saved_Model\XGBoost_model.joblib')
 
 
 # Function to select random questions
+@app.route('/', methods=['GET'])
+def home():
+    return 'Welcome to the Exoplanet Prediction API!'
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json  # Receiving the Request Data
