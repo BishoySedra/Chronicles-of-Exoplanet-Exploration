@@ -11,8 +11,7 @@ app = Flask(__name__)
 df = pd.read_csv("Scientific_Info.csv")
 # Load trained model
 
-# model = joblib.load(r'.\Saved_Model\XGBoost_model.joblib')
-
+model = joblib.load(r'.\Saved_Model\XGBoost_model.joblib')
 
 # Function to select random questions
 @app.route('/', methods=['GET'])
