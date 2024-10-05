@@ -1,29 +1,22 @@
-from flask import Flask, request, jsonify
-import numpy as np
-import joblib
+from flask import Flask, jsonify, request
 import pandas as pd
-import re
-import matplotlib.pyplot as plt
-import sys
-import pkgutil
+import random
+import joblib
 
 app = Flask(__name__)
 
-# Load Data Frame to retrieve random record with the predicted planet type
+# Load the pre-trained model
+model = joblib.load('model.joblib')
+
+# Load the CSV file containing the data
 df = pd.read_csv("Scientific_Info.csv")
 
-# Load trained model
-model = joblib.load("New_model.joblib")
-
-# Function to select random questions
-@app.route('/', methods=['GET'])
-def home():
-    return 'Welcome to the Exoplanet Prediction API!'
-
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])  # Changed to GET for testing
 def predict():
-    data = request.json  # Receiving the Request Data
+    # Initialize data manually for testing purposes
+    data = request.get_json()
 
+    # Mapping of user responses to numerical values
     response_mapping = {
         'Nearby': 0, 'Intermediate': 1, 'Distant': 2,
         'Small_planet_mass': 0, 'Large_planet_mass': 1,
@@ -37,7 +30,7 @@ def predict():
         'Super-Earth': 9
     }
 
-    # Mapping user responses to numerical features
+    # Map user responses to numerical features
     features = [response_mapping[answer] for answer in data['responses']]
 
     # Predict using the model
@@ -66,12 +59,9 @@ def predict():
     # Return the prediction and a random record as JSON
     return jsonify({
         'predicted_planet_type': predicted_planet_type,
-        'random_record': random_record['name']
+        'random_record': random_record.get('name', "No record found")
     })
 
-# Check for imported libraries
-# imported_modules = {module for _, module, _ in pkgutil.iter_modules() if module in sys.modules}
-# print("\n".join(imported_modules))
 
 if __name__ == '__main__':
     app.run(debug=True)
