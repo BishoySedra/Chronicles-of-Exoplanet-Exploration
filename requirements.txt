@@ -1,5 +1,5 @@
 Flask==3.0.3
 pandas==1.4.2
 joblib==1.1.0
-werkzeug=3.0.3
+werkzeug==3.0.3
 gunicorn
