@@ -11,8 +11,9 @@ app = Flask(__name__)
 
 # Load Data Frame to retrieve random record with the predicted planet type
 df = pd.read_csv("Scientific_Info.csv")
+
 # Load trained model
-model = joblib.load("XGBoost_model.joblib")
+model = joblib.load("New_model.joblib")
 
 # Function to select random questions
 @app.route('/', methods=['GET'])
@@ -69,8 +70,8 @@ def predict():
     })
 
 # Check for imported libraries
-imported_modules = {module for _, module, _ in pkgutil.iter_modules() if module in sys.modules}
-print("\n".join(imported_modules))
+# imported_modules = {module for _, module, _ in pkgutil.iter_modules() if module in sys.modules}
+# print("\n".join(imported_modules))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -83,6 +83,7 @@ def compare_exoplanet(mass_str, radius_str):
     plt.show()
 
 # Prediction function with random record retrieval
+# sample data: {"responses": ["Nearby", "Small_planet_mass", "Low_host
 def predict(data):
     # Assume response_mapping and model have been defined
     response_mapping = {
