@@ -74,13 +74,4 @@ def predict(data: PredictRequest):
         random_record = {"message": "No records found for the predicted planet type"}
 
     # Return the prediction and a random record as JSON
-    return {
-        "message": "Prediction successful",
-        "body":[
-            {
-                "predicted_planet_type": predicted_planet_type,
-                "random_record": random_record
-            }
-        ],
-        "status": "200"
-    }
+    return { "predicted_planet_type": predicted_planet_type, "random_record": random_record }
