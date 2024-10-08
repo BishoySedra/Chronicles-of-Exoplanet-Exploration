@@ -20,7 +20,7 @@ class PredictRequest(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, from NASA Exoplanet Exploration API!"}
+    return {"message": "Hello, World"}
 
 @app.post('/predict')
 def predict(data: PredictRequest):
@@ -35,9 +35,9 @@ def predict(data: PredictRequest):
         'Low_eccentricity': 0, 'High_eccentricity': 1,
         'Low_stellar_magnitude': 0, 'High_stellar_magnitude': 1,
         'Cool': 0, 'Warm': 1, 'Hot': 2,
-        'Sub_Neptune': 0, 'Super_Jovian': 1, 'Mega_Earth': 2, 'Mini_Neptune': 3,
-        'Neptune_class': 4, 'Jovian': 5, 'Earth_like': 6, 'Mini_Earth': 7, 'Sub_Jovian': 8,
-        'Super_Earth': 9
+        'Sub-Neptune': 0, 'Super-Jovian': 1, 'Mega-Earth': 2, 'Mini-Neptune': 3,
+        'Neptune-class': 4, 'Jovian': 5, 'Earth-like': 6, 'Mini-Earth': 7, 'Sub-Jovian': 8,
+        'Super-Earth': 9
     }
 
     # Map user responses to numerical features
@@ -74,4 +74,7 @@ def predict(data: PredictRequest):
         random_record = {"message": "No records found for the predicted planet type"}
 
     # Return the prediction and a random record as JSON
-    return { "predicted_planet_type": predicted_planet_type, "random_record": random_record }
+    return {
+        "predicted_planet_type": predicted_planet_type,
+        "random_record": random_record.get('name', "No record found")
+    }
