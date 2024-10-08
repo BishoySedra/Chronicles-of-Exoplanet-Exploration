@@ -20,7 +20,7 @@ class PredictRequest(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, World"}
+    return {"message": "Welcome to the exoplanet prediction API!"}
 
 @app.post('/predict')
 def predict(data: PredictRequest):
