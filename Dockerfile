@@ -1,11 +1,11 @@
 # Use the ollama/ollama image as the base image
 FROM ollama/ollama
 
-# Set the working directory (optional)
+# Set the working directory
 WORKDIR /app
-
-# Start the ollama service, pull the model, and stop the process in one command
-RUN nohup ollama serve & sleep 5 && ollama pull llama3.2
 
 # Expose port 11434 for external access
 EXPOSE 11434
+
+# Pull the llama3.2 model during the build process
+RUN ollama serve & ollama pull llama3.2
