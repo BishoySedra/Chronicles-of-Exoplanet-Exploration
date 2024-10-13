@@ -4,8 +4,11 @@ FROM ollama/ollama
 # Set the working directory
 WORKDIR /app
 
+# Pull the llama3.2 model during the build process
+RUN ollama pull llama3.2
+
 # Expose port 11434 for external access
 EXPOSE 11434
 
-# Pull the llama3.2 model during the build process
-RUN ollama serve & ollama pull llama3.2
+# Start the server
+CMD ["ollama", "serve"]
