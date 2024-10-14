@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir -r /code/requirements.txt
 
 COPY ./app /code/app
 
+# Expose port 8000 (optional, Heroku will handle port binding)
 EXPOSE 8000
 
-CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
+# Use the PORT environment variable provided by Heroku
+CMD ["sh", "-c", "uvicorn app.server:app --host 0.0.0.0 --port $PORT"]
