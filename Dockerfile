@@ -12,5 +12,3 @@ EXPOSE 8000
 
 # Use the PORT environment variable provided by Heroku
 CMD ["sh", "-c", "uvicorn app.server:app --host 0.0.0.0 --port $PORT"]
-
-CMD ["sh", "-c", "uvicorn app.server:app --host 0.0.0.0 --port $PORT"]
